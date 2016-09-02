@@ -1,6 +1,6 @@
-## Filter
+## feature-filter-geojson
 
-Filter expressions are used to target specific data in a layer. This library implements the semantics specified by the [Mapbox GL JS spec](https://www.mapbox.com/mapbox-gl-style-spec/#filter).
+This library is forked from [mapbox/feature-filter](https://github.com/mapbox/feature-filter), but adapted to work with GeoJSON features rather than features from a vector tile. This library implements the semantics specified by the [Mapbox GL JS spec](https://www.mapbox.com/mapbox-gl-style-spec/#filter).
 
 ### API
 
@@ -43,7 +43,11 @@ var testFilter = ff(filter);
 // Layer feature that you're testing. Must have type
 // and properties keys.
 var feature = {
-    type: 2,
+    type: 'Feature'
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[...]]
+    },
     properties: {
        class: "street_limited"
        admin_level: 1

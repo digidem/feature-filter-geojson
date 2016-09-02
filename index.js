@@ -2,8 +2,6 @@
 
 module.exports = createFilter;
 
-var types = ['Unknown', 'Point', 'LineString', 'Polygon'];
-
 /**
  * Given a filter expressed as nested arrays, return a new function
  * that evaluates whether a given feature (with a .properties or .tags property)
@@ -13,7 +11,7 @@ var types = ['Unknown', 'Point', 'LineString', 'Polygon'];
  * @returns {Function} filter-evaluating function
  */
 function createFilter(filter) {
-    return new Function('f', 'var p = (f && f.properties || {}); return ' + compile(filter));
+    return new Function('f', 'var p = (f && f.properties || {}); var g = (f && f.geometry || {}); return ' + compile(filter));
 }
 
 function compile(filter) {
@@ -39,14 +37,14 @@ function compile(filter) {
 }
 
 function compilePropertyReference(property) {
-    return property === '$type' ? 'f.type' :
+    return property === '$type' ? 'g.type' :
         property === '$id' ? 'f.id' :
         'p[' + JSON.stringify(property) + ']';
 }
 
 function compileComparisonOp(property, value, op, checkType) {
     var left = compilePropertyReference(property);
-    var right = property === '$type' ? types.indexOf(value) : JSON.stringify(value);
+    var right = JSON.stringify(value);
     return (checkType ? 'typeof ' + left + '=== typeof ' + right + '&&' : '') + left + op + right;
 }
 
@@ -55,7 +53,6 @@ function compileLogicalOp(expressions, op) {
 }
 
 function compileInOp(property, values) {
-    if (property === '$type') values = values.map(function(value) { return types.indexOf(value); });
     var left = JSON.stringify(values.sort(compare));
     var right = compilePropertyReference(property);
 

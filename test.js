@@ -45,8 +45,8 @@ test('==, null', function(t) {
 
 test('==, $type', function(t) {
     var f = filter(['==', '$type', 'LineString']);
-    t.equal(f({type: 1}), false);
-    t.equal(f({type: 2}), true);
+    t.equal(f({geometry: {type: 'Point'}}), false);
+    t.equal(f({geometry: {type: 'LineString'}}), true);
     t.end();
 });
 
@@ -95,8 +95,8 @@ test('!=, null', function(t) {
 
 test('!=, $type', function(t) {
     var f = filter(['!=', '$type', 'LineString']);
-    t.equal(f({type: 1}), true);
-    t.equal(f({type: 2}), false);
+    t.equal(f({geometry: {type: 'Point'}}), true);
+    t.equal(f({geometry: {type: 'LineString'}}), false);
     t.end();
 });
 
@@ -283,14 +283,14 @@ test('in, large_multiple', function(t) {
 
 test('in, $type', function(t) {
     var f = filter(['in', '$type', 'LineString', 'Polygon']);
-    t.equal(f({type: 1}), false);
-    t.equal(f({type: 2}), true);
-    t.equal(f({type: 3}), true);
+    t.equal(f({geometry: {type: 'Point'}}), false);
+    t.equal(f({geometry: {type: 'LineString'}}), true);
+    t.equal(f({geometry: {type: 'Polygon'}}), true);
 
     var f1 = filter(['in', '$type', 'Polygon', 'LineString', 'Point']);
-    t.equal(f1({type: 1}), true);
-    t.equal(f1({type: 2}), true);
-    t.equal(f1({type: 3}), true);
+    t.equal(f1({geometry: {type: 'Point'}}), true);
+    t.equal(f1({geometry: {type: 'LineString'}}), true);
+    t.equal(f1({geometry: {type: 'Polygon'}}), true);
 
     t.end();
 });
@@ -348,9 +348,9 @@ test('!in, large_multiple', function(t) {
 
 test('!in, $type', function(t) {
     var f = filter(['!in', '$type', 'LineString', 'Polygon']);
-    t.equal(f({type: 1}), true);
-    t.equal(f({type: 2}), false);
-    t.equal(f({type: 3}), false);
+    t.equal(f({geometry: {type: 'Point'}}), true);
+    t.equal(f({geometry: {type: 'LineString'}}), false);
+    t.equal(f({geometry: {type: 'Polygon'}}), false);
     t.end();
 });
 
