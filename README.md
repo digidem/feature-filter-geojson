@@ -1,5 +1,9 @@
 ## feature-filter-geojson
 
+[![Build Status](https://travis-ci.org/digidem/feature-filter-geojson.svg?branch=master)](https://travis-ci.org/digidem/feature-filter-geojson)
+[![npm](https://img.shields.io/npm/v/feature-filter-geojson.svg)](https://www.npmjs.com/package/feature-filter-geojson)
+
+
 This library is forked from [mapbox/feature-filter](https://github.com/mapbox/feature-filter), but adapted to work with GeoJSON features rather than features from a vector tile. This library implements the semantics specified by the [Mapbox GL JS spec](https://www.mapbox.com/mapbox-gl-style-spec/#filter).
 
 ### API
