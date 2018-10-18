@@ -11,6 +11,7 @@ module.exports = createFilter
  * @returns {Function} filter-evaluating function
  */
 function createFilter (filter) {
+  // eslint-disable-next-line no-new-func
   return new Function('f', 'var p = (f && f.properties || {}); var g = (f && f.geometry || {}); return ' + compile(filter))
 }
 
