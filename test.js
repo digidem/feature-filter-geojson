@@ -7,6 +7,7 @@ test('degenerate', function (t) {
   t.equal(filter()(), true)
   t.equal(filter(undefined)(), true)
   t.equal(filter(null)(), true)
+  t.equal(filter({properties: null})(), true)
   t.end()
 })
 
