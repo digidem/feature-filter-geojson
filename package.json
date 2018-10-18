@@ -12,7 +12,8 @@
   },
   "scripts": {
     "pretest": "standard index.js test.js",
-    "test": "tape test.js"
+    "test": "tape test.js",
+    "bench": "node bench/bench.js > bench/results.txt && node bench/big.js >> bench/results.txt"
   },
   "repository": {
     "type": "git",

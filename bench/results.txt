@@ -1,0 +1,4 @@
+create filters: 29.280ms
+apply filters: 40.983ms
+create 64000-item filter: 53.597ms
+filter 1 million times: 92.912ms
